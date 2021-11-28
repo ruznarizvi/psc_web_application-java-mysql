@@ -31,7 +31,6 @@ INDEX VERSION 1.131+C:\Users\Ruzna\Desktop\psc_web_application-java-mysql\.metad
 2715310064.index
 2668353349.index
 1817499168.index
-1598030035.index
 1132740132.index
 2632442999.index
 75931715.index
