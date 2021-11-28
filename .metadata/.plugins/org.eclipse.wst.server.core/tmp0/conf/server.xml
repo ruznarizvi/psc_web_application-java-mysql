@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Users\Ruzna\Desktop\PSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\Ruzna\Desktop\PSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\psc_web_app" path="/psc_web_app" reloadable="true" source="org.eclipse.jst.jee.server:psc_web_app"/><Context docBase="C:\Users\Ruzna\Desktop\PSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\UserManagement" path="/UserManagement" reloadable="true" source="org.eclipse.jst.jee.server:UserManagement"/></Host>
+      <Context docBase="C:\Users\Ruzna\Desktop\psc_web_application-java-mysql\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\Ruzna\Desktop\psc_web_application-java-mysql\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\psc_web_app" path="/psc_web_app" reloadable="true" source="org.eclipse.jst.jee.server:psc_web_app"/><Context docBase="C:\Users\Ruzna\Desktop\psc_web_application-java-mysql\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\UserManagement" path="/UserManagement" reloadable="true" source="org.eclipse.jst.jee.server:UserManagement"/></Host>
     </Engine>
   </Service>
 </Server>

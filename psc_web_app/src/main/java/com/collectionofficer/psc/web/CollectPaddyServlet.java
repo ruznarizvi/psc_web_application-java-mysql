@@ -20,10 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.collectionofficer.psc.bean.CollectPaddy;
+import com.collectionofficer.psc.bean.CollectionOfficerProfile;
 import com.collectionofficer.psc.bean.Farmer;
 import com.collectionofficer.psc.bean.IssuedPayment;
 import com.collectionofficer.psc.bean.PaddyPricing;
 import com.collectionofficer.psc.dao.CollectPaddyDao;
+import com.collectionofficer.psc.dao.CollectionOfficerProfileDao;
 import com.collectionofficer.psc.dao.FarmerDao;
 import com.collectionofficer.psc.dao.IssuedPaymentDao;
 import com.collectionofficer.psc.dao.PaddyPricingDao;
@@ -50,6 +52,7 @@ public class CollectPaddyServlet extends HttpServlet {
 		  issuedPaymentDao = new IssuedPaymentDao();
 		  paddyPricingDao = new PaddyPricingDao();  
 		  farmerDao = new FarmerDao();
+		
 	}
 	
 	/**
@@ -103,12 +106,11 @@ public class CollectPaddyServlet extends HttpServlet {
 				showEditForm(request, response);
 		
 			break;
-			
+	
 		case "/update":
 				updatePaddy(request, response);
 			break;
 	
-			
 			//if there is any other action other than the above then it will go to default
 			//the list keyword will be handled by the default section
 			//simply said it will call the user list KEY and show all the list users in the page
@@ -122,8 +124,8 @@ public class CollectPaddyServlet extends HttpServlet {
 		}
 	}
 	
-	
-	//showNewForm method
+
+		
 		private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("collectPaddyForm.jsp");
@@ -131,6 +133,7 @@ public class CollectPaddyServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		}
+		
 
 		//insert user method
 		private void insertPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -139,8 +142,7 @@ public class CollectPaddyServlet extends HttpServlet {
 			
 			int farmer_Id = Integer.parseInt(request.getParameter("farmer_Id"));	
 			int paddy_Id = Integer.parseInt(request.getParameter("paddy_Id"));
-			int total_weight = Integer.parseInt(request.getParameter("total_weight"));
-				
+			int total_weight = Integer.parseInt(request.getParameter("total_weight"));		
 			
 			String session = (String) request.getSession(false).getAttribute("collection_officer_Email");
 			
@@ -316,11 +318,10 @@ public class CollectPaddyServlet extends HttpServlet {
 		}
 		
 		}
-		//default method
 		
-		private void listPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+		//default method
+			private void listPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
 			try {
-			
 			//calling the Selectallusers method from the userdao class and storing them in a list
 			List<CollectPaddy> listPaddy = collectPaddyDao.selectAllPaddy();
 			//setting the listUsers to the listUser key by using the request object setAttribute method

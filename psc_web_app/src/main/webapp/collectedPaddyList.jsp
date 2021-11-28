@@ -97,9 +97,11 @@
 						href="#about"><span>Collection Officer</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="profile.html"><i
+							<li><a href="<%=request.getContextPath()%>/editCollectionOfficerProfile?collection_officer_Id=<c:out value='${collectionOfficerProfile.collection_officer_Id}' />"><i
 									style="font-size: 1.1rem; margin-left: 38px"
 									class="bi bi-person-lines-fill"><span> Profile</span></i></a></li>
+									
+									
 							<li>
 								<form action="logout">
 									<div align="center">
@@ -163,7 +165,7 @@
 										<td><c:out value="Rs.${collectPaddy.total_amount}" /></td>
 										<td><c:out value="${collectPaddy.purchase_date}" /></td>
 								
-											<td><a href="edit?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}' />">Edit</a>
+								        <td><a href="edit?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
 								href="delete?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}'/>">Delete</a></td>														
 									</tr>

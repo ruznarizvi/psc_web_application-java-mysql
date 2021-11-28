@@ -1,0 +1,51 @@
+package com.collectionofficer.psc.bean;
+
+public class CollectionOfficerProfile {
+	private String collection_officer_Name;
+	private String collection_officer_Email;
+	private String collection_officer_Address;
+	private int collection_officer_Contact;
+	
+	
+	
+	public CollectionOfficerProfile(String collection_officer_Name, String collection_officer_Email,
+			String collection_officer_Address, int collection_officer_Contact
+			) {
+		super();
+		this.collection_officer_Name = collection_officer_Name;
+		this.collection_officer_Email = collection_officer_Email;
+		this.collection_officer_Address = collection_officer_Address;
+		this.collection_officer_Contact = collection_officer_Contact;
+
+	}
+	
+	public String getCollection_officer_Name() {
+		return collection_officer_Name;
+	}
+	public void setCollection_officer_Name(String collection_officer_Name) {
+		this.collection_officer_Name = collection_officer_Name;
+	}
+	public String getCollection_officer_Email() {
+		return collection_officer_Email;
+	}
+	public void setCollection_officer_Email(String collection_officer_Email) {
+		this.collection_officer_Email = collection_officer_Email;
+	}
+	public String getCollection_officer_Address() {
+		return collection_officer_Address;
+	}
+	public void setCollection_officer_Address(String collection_officer_Address) {
+		this.collection_officer_Address = collection_officer_Address;
+	}
+	public int getCollection_officer_Contact() {
+		return collection_officer_Contact;
+	}
+	public void setCollection_officer_Contact(int collection_officer_Contact) {
+		this.collection_officer_Contact = collection_officer_Contact;
+	}
+
+
+
+	
+	
+}
