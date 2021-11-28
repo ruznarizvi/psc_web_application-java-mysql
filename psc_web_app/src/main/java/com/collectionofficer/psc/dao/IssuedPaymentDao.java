@@ -14,13 +14,7 @@ import com.collectionofficer.psc.bean.IssuedPayment;
 
 
 
-public class IssuedPaymentDao {
-	
-	private String jdbcURL = "jdbc:mysql://localhost:3306/psc_web_app?allowPublicKeyRetrieval=true";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "Ruzna_421455";
-	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-	
+public class IssuedPaymentDao extends MainDao {	
 	
 	private static final String INSERT_ISSUED_PAYMENT_DETAILS_SQL = "INSERT INTO tbl_issued_payment_details" + "(issued_status, farmer_Id, paddy_Id, total_weight,total_amount, purchase_date) VALUES " + " (?, ?, ?, ?, ?, ?);";
 	
@@ -29,30 +23,6 @@ public class IssuedPaymentDao {
 	public IssuedPaymentDao() {
 
 	}
-	
-	//writing a method to get the connection of jdbc and inside it loading the driver also,
-	//the method will return the connection
-	// simply said inside this method: 
-	//1. loading the connection 
-	//2. getting the connection 
-	//3. returning connection
-	public Connection getConnection() {
-		Connection connection = null;
-		try {
-			//loading the driver, jdbc driver is a variable assigned above
-			Class.forName(jdbcDriver);
-			//getting the connection using the driver manager class
-			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return connection;
-	}
-	
 	
 	public void insertIssuedPaymentDetails(IssuedPayment issuedPayment) throws SQLException {
 		//show in the console

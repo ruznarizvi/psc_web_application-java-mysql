@@ -97,7 +97,7 @@
 						href="#about"><span>Collection Officer</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="profile.html"><i
+							<li><a href="<%=request.getContextPath()%>/list"><i
 									style="font-size: 1.1rem; margin-left: 38px"
 									class="bi bi-person-lines-fill"><span> Profile</span></i></a></li>
 							<li>

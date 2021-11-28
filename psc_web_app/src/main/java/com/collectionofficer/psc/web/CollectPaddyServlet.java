@@ -20,12 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.collectionofficer.psc.bean.CollectPaddy;
-import com.collectionofficer.psc.bean.CollectionOfficerProfile;
 import com.collectionofficer.psc.bean.Farmer;
 import com.collectionofficer.psc.bean.IssuedPayment;
 import com.collectionofficer.psc.bean.PaddyPricing;
 import com.collectionofficer.psc.dao.CollectPaddyDao;
-import com.collectionofficer.psc.dao.CollectionOfficerProfileDao;
 import com.collectionofficer.psc.dao.FarmerDao;
 import com.collectionofficer.psc.dao.IssuedPaymentDao;
 import com.collectionofficer.psc.dao.PaddyPricingDao;

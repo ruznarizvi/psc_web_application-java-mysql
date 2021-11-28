@@ -13,11 +13,8 @@ import java.util.List;
 import com.collectionofficer.psc.bean.Farmer;
 
 
-public class FarmerDao {
-	private String jdbcURL = "jdbc:mysql://localhost:3306/psc_web_app?allowPublicKeyRetrieval=true";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "Ruzna_421455";
-	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+public class FarmerDao extends MainDao {
+
 	
 	private static final String SELECT_ALL_FARMER_DETAILS = "select * from tbl_farmer";
 //	private static final String SELECT_PADDY_PRICING_BY_ID = "select ";
@@ -26,36 +23,12 @@ public class FarmerDao {
 
 	}
 	
-	//writing a method to get the connection of jdbc and inside it loading the driver also,
-	//the method will return the connection
-	// simply said inside this method: 
-	//1. loading the connection 
-	//2. getting the connection 
-	//3. returning connection
-	public Connection getConnection() {
-		Connection connection = null;
-		try {
-			//loading the driver, jdbc driver is a variable assigned above
-			Class.forName(jdbcDriver);
-			//getting the connection using the driver manager class
-			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return connection;
-	}
-	
-	
-	//select all users method
-	//storing all the users in the list and returning that list (Import list) (return type is the list)
+	//select all farmers method
+	//storing all the farmers in the list and returning that list (Import list) (return type is the list)
 	public List<Farmer> selectAllFarmers() {
 
 		// using try-with-resources to avoid closing resources (boiler plate code)
-		//collected paddies will be stored in the array list
+		//farmers list will be stored in the array list
 		List<Farmer> farmers = new ArrayList<>();
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
