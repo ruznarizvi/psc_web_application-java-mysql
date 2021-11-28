@@ -17,5 +17,6 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.collectionofficer.psc.bean.CollectPaddy"/>
     <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.CollectPaddyDao"/>
+    <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.CollectionOfficerProfileDao"/>
     <fullyQualifiedTypeName name="com.collectionofficer.psc.bean.CollectionOfficerProfile"/>
 </qualifiedTypeNameHistroy>

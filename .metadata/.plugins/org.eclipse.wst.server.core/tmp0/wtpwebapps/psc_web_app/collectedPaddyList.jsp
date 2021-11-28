@@ -119,7 +119,7 @@
 	</header>
 	
 		<section data-aos="fade-up" data-aos-delay="200"
-		style="margin-top: 5rem">
+		style="margin-top: 4rem">
 		<div class="container-xl">
 		 <div class="col-sm-8">						
 			<a href="<%=request.getContextPath()%>/new" style="margin: 1rem"  class="btn btn-success">Collect Paddy</a>
@@ -165,7 +165,7 @@
 								
 								        <td><a href="edit?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}'/>">Delete</a></td>														
+								class="delete-link" href="delete?collected_paddy_details_Id=<c:out value='${collectPaddy.collected_paddy_details_Id}'/>">Delete</a></td>														
 									</tr>
 								</c:forEach>
 							</tbody>
