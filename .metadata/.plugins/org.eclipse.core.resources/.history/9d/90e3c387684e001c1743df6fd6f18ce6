@@ -1,0 +1,277 @@
+package next.xadmin.psc.web;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import next.xadmin.psc.bean.CollectNewPaddyBean;
+import next.xadmin.psc.dao.CollectNewPaddyDao;
+
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+
+
+
+
+/**
+ * Servlet implementation class UserServlet
+ */
+//this is the actions
+//using a single servlet to handle all the web requests
+@WebServlet("/")
+public class CollectNewPaddyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	//creating an object of the userdao here
+	//the first one is the UserDao class created and the second is the variable assigned
+	private CollectNewPaddyDao collectNewPaddyDao;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+
+	public void init() throws ServletException {
+		//the first one is the variable assigned the second is the UserDao class created
+		collectNewPaddyDao = new CollectNewPaddyDao();
+		
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//writing all the implementations to handle all the actions
+		//actions like CRUD
+		
+		//for that first step take an action
+		//from the request servlet get an actions
+		//we are taking an action by calling the getServlet method through the request object and storing it in the action variable
+		String action = request.getServletPath();
+		try {
+		//writing a switch case to handle all the actions
+		switch(action)
+		{
+		case "/new":
+			//if the action is new, we are going to call the showNewForm method
+			// we are [assing the request and response to the http servlet
+			showNewForm(request, response);
+		break;
+		
+		case "/insert":
+
+				insertUser(request, response);
+		
+			break;
+		
+		case "/delete":
+
+				deleteUser(request, response);
+	
+			break;
+			
+		case "/edit":
+				showEditForm(request, response);
+		
+			break;
+			
+		case "/update":
+				updateUser(request, response);
+			break;
+			
+			//if there is any other action other than the above then it will go to default
+			//the list keyword will be handled by the default section
+			//simply said it will call the user list KEY and show all the list users in the page
+			default:
+				listUser(request, response);
+				break;
+		}
+	}
+		catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
+	}
+
+	//showNewForm method
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("collectNewPaddy.jsp");
+		//to forward the request and response to the user form.jsp file
+		dispatcher.forward(request, response);
+		
+	}
+
+	//insert user method
+	private void insertNewPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		//by the help of the request object using the get parameter method, we are taking the name, email, country from the jsp page
+		int farmerId = request.getParameter("farmerId");
+		int paddyId = request.getParameter("paddyId");
+		String totalWeight = request.getParameter("totalWeight");
+		
+		//after that we are storing it in the userBean class
+		//the newUser variable contains the data
+		CollectNewPaddy collectNewPaddy = new CollectNewPaddyBean(farmerId, paddyId, totalWeight);
+		//then we are calling the insertUser method of the UserDao class created
+		collectNewPaddy.insertNewPaddy(collectNewPaddy);
+		//sending a response to the sendRedirect list taking the action as a list
+		//the list action will be handled by the default in the swicth statement since its different
+		response.sendRedirect("list");
+	}
+	
+	//delete user method
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		//getting the id from the request object using the getParamter method and transfering into integer type and passing into the id variable
+		int id = Integer.parseInt(request.getParameter("id"));
+		try {
+		//calling the deleteUser method of the userDao class created directly and passing the id to delete the user according to that id
+		userDao.deleteUser(id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		//after that returning the response to the list, it will handle in the swicth case of the default section
+		response.sendRedirect("list");
+
+	}
+		
+	public void GenerateFpdf() throws SQLException {
+		
+		try {
+			String file_name = "D:\\generate_pdf\\users_test.pdf";
+			
+			//jar file object
+			Document document = new Document();
+			
+			PdfWriter.getInstance(document, new FileOutputStream(file_name));
+			
+			document.open();
+					
+			UserDao obJDBConnection = new UserDao();
+			Connection connection = obJDBConnection.getConnection();
+			
+			
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			
+			String query = "select * from users";
+			ps = connection.prepareStatement (query);
+			rs = ps.executeQuery();
+			
+
+			PdfPTable table = new PdfPTable(3);
+			
+			PdfPCell c1 = new PdfPCell(new Phrase("Name"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Email"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Country"));
+			table.addCell(c1);
+			
+			table.setHeaderRows(1);
+			
+			while (rs.next()) {
+				
+				table.addCell(rs.getString("name"));
+				table.addCell(rs.getString("email"));
+				table.addCell(rs.getString("country"));
+				//Paragraph para = new Paragraph(rs.getString("name")+" "+rs.getString("email"));
+				//document.add(para);
+				//document.add(new Paragraph (" "));
+				
+			}
+			document.add(table);
+			
+			
+			
+			document.close();
+			}catch (Exception e) {
+				
+				System.out.println(e);
+				
+				
+				
+			}
+		
+	}
+	
+	//showedit form method
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		//getting the id from the request object using the getParamter method and transfering into integer type and passing into the id variable
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		//creating an existing user object
+		User existingUser;
+		try {
+		//calling the selectUser method in the userDao class and passing the id and we are storing it in the existingUser variable
+		existingUser = userDao.selectUser(id);
+		// forward the user-form.jsp PAGE!
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
+		//set the exisiting user object to the user key using the set attribute method of the request object
+		request.setAttribute("user", existingUser);
+		//forward the request to the user-form.jsp page
+		dispatcher.forward(request, response);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	//update method
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		//taking the name, email, and country from the jsp page using the request object and get paramater method
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+
+		//after that we are storing it in the userBean class
+				//the newUser variable contains the data
+		User user = new User(id, name, email, country);
+		//calling user update method using the userdao object
+		userDao.updateUser(user); 
+		response.sendRedirect("list");
+	}
+	
+	//default method
+	
+	private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+		try {
+		
+		//calling the Selectallusers method from the userdao class and storing them in a list
+		List<User> listUser = userDao.selectAllUsers();
+		//setting the listUsers to the listUser key by using the request object setAttribute method
+		//so that we could use the key in the JSP page to list out all the users
+		request.setAttribute("listUser", listUser);
+		//here we are using the getRequestDispatcher to forward the list to the user-list.jsp page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+		dispatcher.forward(request, response);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+}

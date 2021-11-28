@@ -1,0 +1,374 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+<title>Paddy Storage Cooperation</title>
+<meta content="" name="description" />
+<meta content="" name="keywords" />
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet" />
+
+<!-- Vendor CSS Files -->
+<link
+	href="CollectionOfficerAssets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="CollectionOfficerAssets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet" />
+<link
+	href="CollectionOfficerAssets/vendor/aos/aos.css"
+	rel="stylesheet" />
+<link
+	href="CollectionOfficerAssets/vendor/remixicon/remixicon.css"
+	rel="stylesheet" />
+<link
+	href="CollectionOfficerAssets/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet" />
+<link
+	href="CollectionOfficerAssets/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<!-- Template Main CSS File -->
+<link
+	href="CollectionOfficerAssets/css/style.css"
+	rel="stylesheet" />
+
+<!-- =======================================================
+  * Template Name: FlexStart - v1.7.0
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+	<%
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+	if (session.getAttribute("email") == null) {
+		response.sendRedirect("userLogin.jsp");
+	}
+	%>
+	<!-- ======= Header ======= -->
+	<header id="header" class="header fixed-top">
+		<div
+			class="
+          container-fluid container-xl
+          d-flex
+          align-items-center
+          justify-content-between
+        ">
+			<a href="dashboard.html" class="logo d-flex align-items-center">
+				<!-- <img src="assets/img/logo.png" alt="" /> --> <img
+				style="width: 30px;" src="CollectionOfficerAssets/img/logo_final.png" alt=""> <span
+				style="font-size: 1.2rem">PADDY STORAGE COOPERATION</span>
+			</a>
+
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li><a class="nav-link"
+						href="<%=request.getContextPath()%>/collectionOfficerDashboard.jsp">Dashboard</a></li>
+					<li><a class="active"
+						href="<%=request.getContextPath()%>/collectPaddy.jsp">Collect Paddy</a>
+					</li>
+					<li><a class="nav-link "
+						href="<%=request.getContextPath()%>/pricelist">Paddy
+							Pricing</a></li>
+
+					<li><a class="nav-link"
+						href="<%=request.getContextPath()%>/farmerlist">Farmers</a>
+					</li>					
+					<li class="dropdown"><a class="getstarted scrollto"
+						href="#about"><span>Collection Officer</span> <i
+							class="bi bi-chevron-down"></i></a>
+						<ul>
+							<li><a href="profile.html"><i
+									style="font-size: 1.1rem; margin-left: 38px"
+									class="bi bi-person-lines-fill"><span> Profile</span></i></a></li>
+							<li>
+								<form action="logout">
+									<div align="center">
+										<button type="submit" style="margin-left:3rem;" class="btn bg-transparent logout">
+											<i style="font-size: 1.1rem;" class="bi bi-box-arrow-right"><span>
+													Logout</span></i>
+										</button>
+									</div>
+								</form>
+							</li>
+						</ul></li>
+				</ul>
+				<i class="bi bi-list mobile-nav-toggle"></i>
+			</nav>
+			<!-- .navbar -->
+		</div>
+	</header>
+
+	<!-- ======= Counts Section ======= -->
+
+	<div class="container">
+		<div class="row">
+			<div class="">
+				<!-- ======= Counts Section ======= -->
+				<section id="counts" class="counts">
+					<div class="container" data-aos="fade-up">
+						<div class="row gy-4">
+							<div class="col-lg-3 col-md-6">
+								<div class="count-box">
+									<i class="fas fa-tractor" style="color: #15be56"></i>
+									<div>
+										<span>28,046kg</span>
+										<p>Daily Paddy Count</p>
+									</div>
+								</div>
+							</div>
+					   <div class="col-lg-3 col-md-6">
+					         <div class="count-box">
+					            <i class="fas fa-warehouse" style="color:darkcyan"></i>
+					            <div>
+					              <span>50,000kg</span>
+					              <p>Allocated Capacity</p>
+					            </div>
+					         </div>
+					    </div>
+							<div class="col-lg-3 col-md-6">
+								<div class="count-box">
+									<i class="bi bi-bank" style="color: #690986;"></i>
+									<div>
+										<span>Rs.2M</span>
+										<p>Allocated Amount</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6">
+								<div class="count-box">
+									<i class="bi bi-cash-coin" style="color: #ee6c20"></i>
+									<div>
+										<span>Rs.800,000</span>
+										<p>Current Account Balance</p>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<!-- End Counts Section -->
+
+   <section  style="margin-top:-4rem">
+   	<nav class="navbar navbar-expand-md navbar-dark"
+			style="background-color: blue">
+			<div>
+				<a href="https://www.xadmin.net" class="navbar-brand"> User
+					Management Application </a>
+			</div>
+
+			<ul class="navbar-nav">
+			<!-- it will go to the switchcase in the servlet -->
+				<li><a href="<%=request.getContextPath()%>/list"
+					class="nav-link">Users</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br>
+
+	<div class="row">
+		<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
+		<div class="container">
+			<h3 class="text-center">List of Users</h3>
+			<hr>
+			<div class="container text-left">
+
+				<a href="<%=request.getContextPath()%>/new" class="btn btn-success">Collect Paddy</a>
+					<a	href="generatepdf">Report</a>
+			</div>
+			<br>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Farmer Id</th>
+						<th>Paddy Id</th>
+						<th>Total Weight</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- Here is the list user key connected with servlet -->
+					<c:forEach var="collectPaddy" items="${listPaddy}">
+
+						<tr>
+							<td><c:out value="${collectPaddy.collectPaddyId}" /></td>
+							<td><c:out value="${collectPaddy.farmerId}" /></td>
+							<td><c:out value="${collectPaddy.paddyId}" /></td>
+							<td><c:out value="${collectPaddy.totalWeight}" /></td>
+							<td><a href="edit?id=<c:out value='${collectPaddy.collectPaddyId}' />">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="delete?id=<c:out value='${collectPaddy.collectPaddyId}' />">Delete</a></td>
+						</tr>
+					</c:forEach>
+		
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+    <%--   <div class="container-xl">
+        <div class="col-sm-8">						
+          <a style="margin:1rem;" href="<%=request.getContextPath()%>/collectNewPaddy.jsp" class="btn btn-success">Collect Paddy</a>
+      </div>
+        <div class="table-responsive" style="margin-top: 1px;">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h2>Daily Paddy Purchases</h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col" >Id</th>
+                      <th scope="col">Farmer Name</th>
+                      <th scope="col">Paddy Type</th>
+                      <th scope="col">Buying Price (Rs/1kg)</th>
+                      <th scope="col">Total Weight (In kg)</th>
+                      <th scope="col">Total Amount</th>
+                      <th scope="col">Purchase Date</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Ravi Das</td>
+                      <td>Kalu Heenati</td>
+                      <td>Rs.54</td>
+                      <td>100kg</td>
+                      <td>Rs.13400</td>
+                      <td>Jun 15, 2021</td>   
+                      <td><a href="edit-collected-paddy.html" style="margin-right:0.5rem">Edit</a><a href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Sunil Perera</td>
+                      <td>Murungakayan</td>
+                      <td>Rs.48</td>
+                      <td>50kg</td>
+                      <td>Rs.4900</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html">Edit</a><a href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Lareef Hathem</td>
+                      <td>Kuruwee</td>
+                      <td>Rs.40</td>
+                      <td>160kg</td>
+                      <td>Rs.6540</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html" >Edit</a><a  href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Ravi Das</td>
+                      <td>Samba</td>
+                      <td>Rs.38</td>
+                      <td>200kg</td>
+                      <td>Rs.20600</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html">Edit</a><a  href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Lareef Hathem</td>
+                      <td>Kuruwee</td>
+                      <td>Rs.45</td>
+                      <td>180kg</td>
+                      <td>Rs.6540</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html">Edit</a><a  href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Ravi Das</td>
+                      <td>Samba</td>
+                      <td>Rs.49</td>
+                      <td>150kg</td>
+                      <td>Rs.20600</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html" >Edit</a><a  href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Lareef Hathem</td>
+                      <td>Kuruwee</td>
+                      <td>Rs.50</td>
+                      <td>160kg</td>
+                      <td>Rs.6540</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a  style="margin-right:0.5rem"  href="edit-collected-paddy.html">Edit</a><a href="#" class="delete-link">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Ravi Das</td>
+                      <td>Samba</td>
+                      <td>Rs.43</td>
+                      <td>200kg</td>
+                      <td>Rs.20600</td>
+                      <td>Jun 15, 2021</td>   
+                      <td ><a style="margin-right:0.5rem" href="edit-collected-paddy.html">Edit</a><a  href="#" class="delete-link">Delete</a></td>
+                    </tr>
+
+                  </tbody>
+                 
+                </table>
+            </div>
+        </div>        
+    </div>      --%>
+    </section>
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i> </a>
+
+	<!-- Vendor JS Files -->
+	<script
+		src="CollectionOfficerAssets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/aos/aos.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/php-email-form/validate.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/purecounter/purecounter.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script
+		src="CollectionOfficerAssets/vendor/glightbox/js/glightbox.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script
+		src="CollectionOfficerAssets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="next.xadmin.psc.bean.CollectNewPaddyBean"/>
+    <fullyQualifiedTypeName name="next.xadmin.psc.dao.CollectNewPaddyDao"/>
+    <fullyQualifiedTypeName name="next.xadmin.psc.dao.CollectPaddyDao"/>
+    <fullyQualifiedTypeName name="next.xadmin.psc.bean.CollectPaddy"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="com.xadmin.usermanagement.bean.User"/>
+    <fullyQualifiedTypeName name="com.xadmin.usermanagement.dao.UserDao"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.List"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.collectionofficer.psc.bean.CollectPaddy"/>
+    <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.CollectPaddyDao"/>
+</qualifiedTypeNameHistroy>

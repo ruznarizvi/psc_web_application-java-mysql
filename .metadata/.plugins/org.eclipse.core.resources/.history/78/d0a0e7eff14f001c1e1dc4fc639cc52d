@@ -1,0 +1,7 @@
+package com.collectionofficer.psc.bean;
+
+public class PaddyPricing {
+private int paddy_Id;
+private String paddy_Type;
+ 
+}

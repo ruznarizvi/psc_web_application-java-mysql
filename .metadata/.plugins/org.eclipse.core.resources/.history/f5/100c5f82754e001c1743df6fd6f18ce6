@@ -1,0 +1,160 @@
+package next.xadmin.psc.web;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import next.xadmin.psc.bean.CollectPaddy;
+import next.xadmin.psc.dao.CollectPaddyDao;
+
+/**
+ * Servlet implementation class CollectPaddyServlet
+ */
+@WebServlet("/")
+public class CollectPaddyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private CollectPaddyDao collectPaddyDao;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CollectPaddyServlet() {
+    	collectPaddyDao = new CollectPaddyDao();
+		
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//writing all the implementations to handle all the actions
+		//actions like CRUD
+		
+		//for that first step take an action
+		//from the request servlet get an actions
+		//we are taking an action by calling the getServlet method through the request object and storing it in the action variable
+		String action = request.getServletPath();
+		try {
+		//writing a switch case to handle all the actions
+		switch(action)
+		{
+		case "/new":
+			//if the action is new, we are going to call the showNewForm method
+			// we are [assing the request and response to the http servlet
+			showNewForm(request, response);
+		break;
+		
+		case "/insert":
+
+				insertPaddy(request, response);
+		
+			break;
+		
+		case "/delete":
+
+				deletePaddy(request, response);
+	
+			break;
+			
+		case "/edit":
+				showEditForm(request, response);
+		
+			break;
+			
+		case "/update":
+				updatePaddy(request, response);
+			break;
+			
+			//if there is any other action other than the above then it will go to default
+			//the list keyword will be handled by the default section
+			//simply said it will call the user list KEY and show all the list users in the page
+			default:
+				listPaddy(request, response);
+				break;
+		}
+	}
+		catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
+	}
+
+	//showNewForm method
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("collectNewPaddy.jsp");
+		//to forward the request and response to the user form.jsp file
+		dispatcher.forward(request, response);
+		
+	}
+
+	//insert user method
+	private void insertPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		//by the help of the request object using the get parameter method, we are taking the name, email, country from the jsp page
+		int farmerId = Integer.parseInt(request.getParameter("farmerId"));
+		int paddyId = Integer.parseInt(request.getParameter("paddyId"));
+		String totalWeight = request.getParameter("totalWeight");
+		
+		//after that we are storing it in the userBean class
+		//the newUser variable contains the data
+		CollectPaddy newPaddy = new CollectPaddy (farmerId, paddyId, totalWeight);
+		//then we are calling the insertUser method of the UserDao class created
+		collectPaddyDao.insertPaddy(newPaddy);
+		//sending a response to the sendRedirect list taking the action as a list
+		//the list action will be handled by the default in the swicth statement since its different
+		response.sendRedirect("list");
+	}
+	
+	//delete user method
+	private void deletePaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		//getting the id from the request object using the getParamter method and transfering into integer type and passing into the id variable
+		int collectPaddyId = Integer.parseInt(request.getParameter("collectPaddyId"));
+		try {
+		//calling the deleteUser method of the userDao class created directly and passing the id to delete the user according to that id
+			collectPaddyDao.deletePaddy(collectPaddyId);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		//after that returning the response to the list, it will handle in the swicth case of the default section
+		response.sendRedirect("list");
+
+	}
+	
+	//showedit form method
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		//getting the id from the request object using the getParamter method and transfering into integer type and passing into the id variable
+		int collectPaddyId = Integer.parseInt(request.getParameter("collectPaddyId"));
+		
+		//creating an existing user object
+		CollectPaddy existingUser;
+		try {
+		//calling the selectUser method in the userDao class and passing the id and we are storing it in the existingUser variable
+		existingUser = collectPaddyDao.selectPaddy(collectPaddyId);
+		// forward the user-form.jsp PAGE!
+		RequestDispatcher dispatcher = request.getRequestDispatcher("collectNewPaddy.jsp");
+		//set the exisiting user object to the user key using the set attribute method of the request object
+		request.setAttribute("user", existingUser);
+		//forward the request to the user-form.jsp page
+		dispatcher.forward(request, response);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+}

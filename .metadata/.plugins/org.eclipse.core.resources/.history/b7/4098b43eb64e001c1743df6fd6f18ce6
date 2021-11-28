@@ -1,0 +1,54 @@
+package next.xadmin.psc.bean;
+
+public class CollectPaddy {
+	private int collect_paddy_Id;
+	private int farmerId;
+	private int paddyId;
+	private String totalWeight;
+	
+	
+	public CollectPaddy(int collectPaddyId, int farmerId, int paddyId, String totalWeight) {
+		super();
+		this.collectPaddyId = collectPaddyId;
+		this.farmerId = farmerId;
+		this.paddyId = paddyId;
+		this.totalWeight = totalWeight;
+	}
+	
+	public CollectPaddy(int farmerId, int paddyId, String totalWeight) {
+		super();
+		this.farmerId = farmerId;
+		this.paddyId = paddyId;
+		this.totalWeight = totalWeight;
+	}
+
+	public int getCollectPaddyId() {
+		return collectPaddyId;
+	}
+	public void setCollectPaddyId(int collectPaddyId) {
+		this.collectPaddyId = collectPaddyId;
+	}
+	public int getFarmerId() {
+		return farmerId;
+	}
+	public void setFarmerId(int farmerId) {
+		this.farmerId = farmerId;
+	}
+	public int getPaddyId() {
+		return paddyId;
+	}
+	public void setPaddyId(int paddyId) {
+		this.paddyId = paddyId;
+	}
+	public String getTotalWeight() {
+		return totalWeight;
+	}
+	public void setTotalWeight(String totalWeight) {
+		this.totalWeight = totalWeight;
+	}
+	
+	
+
+	
+}
+

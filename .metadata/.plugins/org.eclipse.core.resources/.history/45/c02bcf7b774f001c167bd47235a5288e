@@ -1,0 +1,50 @@
+package com.xadmin.usermanagement.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class UserDao {
+	
+	private String jdbcURL = "jdbc:mysql://localhost:3306/userdb_?allowPublicKeyRetrieval=true&useSSL=false";
+	private String jdbcUsername = "root";
+	private String jdbcPassword = "Ruzna_421455";
+	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+	
+	//the following are the CRUD queries stored inside variables
+	
+		private static final String INSERT_USERS_SQL = "INSERT INTO users" + " (name, email, country) VALUES " + " (?, ?, ?);";
+		private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id =?";
+		private static final String SELECT_ALL_USERS = "select * from users";
+		private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
+		private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
+		
+
+		//generating constructor
+		public UserDao() {
+
+		}
+		
+		//writing a method to get the connection of jdbc and inside it loading the driver also,
+		//the method will return the connection
+		// simply said inside this method: 
+		//1. loading the connection 
+		//2. getting the connection 
+		//3. returning connection
+		public Connection getConnection() {
+			Connection connection = null;
+			try {
+				//loading the driver, jdbc driver is a variable assigned above
+				Class.forName(jdbcDriver);
+				//getting the connection using the driver manager class
+				connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return connection;
+		}
+}

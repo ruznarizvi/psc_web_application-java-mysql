@@ -1,0 +1,97 @@
+package com.collectionofficer.psc.bean;
+
+public class CollectionOfficer {
+	private int collection_officer_Id;
+	private String collection_officer_Name;
+	private String collection_officer_Username;
+	private String collection_officer_Email;
+	private String collection_officer_Address;	
+	private String collection_officer_Contact;
+	private String collection_officer_Password;
+	private String regional_center_Id;
+	
+	
+	
+	
+	public CollectionOfficer(int collection_officer_Id, String collection_officer_Name,
+			String collection_officer_Username, String collection_officer_Email, String collection_officer_Address,
+			String collection_officer_Contact, String collection_officer_Password, String regional_center_Id) {
+		super();
+		this.collection_officer_Id = collection_officer_Id;
+		this.collection_officer_Name = collection_officer_Name;
+		this.collection_officer_Username = collection_officer_Username;
+		this.collection_officer_Email = collection_officer_Email;
+		this.collection_officer_Address = collection_officer_Address;
+		this.collection_officer_Contact = collection_officer_Contact;
+		this.collection_officer_Password = collection_officer_Password;
+		this.regional_center_Id = regional_center_Id;
+	}
+	
+
+	public CollectionOfficer(String collection_officer_Name, String collection_officer_Username,
+			String collection_officer_Email, String collection_officer_Address, String collection_officer_Contact,
+			String collection_officer_Password, String regional_center_Id) {
+		super();
+		this.collection_officer_Name = collection_officer_Name;
+		this.collection_officer_Username = collection_officer_Username;
+		this.collection_officer_Email = collection_officer_Email;
+		this.collection_officer_Address = collection_officer_Address;
+		this.collection_officer_Contact = collection_officer_Contact;
+		this.collection_officer_Password = collection_officer_Password;
+		this.regional_center_Id = regional_center_Id;
+	}
+
+
+
+	public int getCollection_officer_Id() {
+		return collection_officer_Id;
+	}
+	public void setCollection_officer_Id(int collection_officer_Id) {
+		this.collection_officer_Id = collection_officer_Id;
+	}
+	public String getCollection_officer_Name() {
+		return collection_officer_Name;
+	}
+	public void setCollection_officer_Name(String collection_officer_Name) {
+		this.collection_officer_Name = collection_officer_Name;
+	}
+	public String getCollection_officer_Username() {
+		return collection_officer_Username;
+	}
+	public void setCollection_officer_Username(String collection_officer_Username) {
+		this.collection_officer_Username = collection_officer_Username;
+	}
+	public String getCollection_officer_Email() {
+		return collection_officer_Email;
+	}
+	public void setCollection_officer_Email(String collection_officer_Email) {
+		this.collection_officer_Email = collection_officer_Email;
+	}
+	public String getCollection_officer_Address() {
+		return collection_officer_Address;
+	}
+	public void setCollection_officer_Address(String collection_officer_Address) {
+		this.collection_officer_Address = collection_officer_Address;
+	}
+	public String getCollection_officer_Contact() {
+		return collection_officer_Contact;
+	}
+	public void setCollection_officer_Contact(String collection_officer_Contact) {
+		this.collection_officer_Contact = collection_officer_Contact;
+	}
+	public String getCollection_officer_Password() {
+		return collection_officer_Password;
+	}
+	public void setCollection_officer_Password(String collection_officer_Password) {
+		this.collection_officer_Password = collection_officer_Password;
+	}
+	public String getRegional_center_Id() {
+		return regional_center_Id;
+	}
+	public void setRegional_center_Id(String regional_center_Id) {
+		this.regional_center_Id = regional_center_Id;
+	}
+	
+	
+	
+}

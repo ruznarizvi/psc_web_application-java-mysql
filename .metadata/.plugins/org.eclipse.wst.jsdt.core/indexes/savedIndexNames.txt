@@ -1,0 +1,10 @@
+INDEX VERSION 1.4+C:\Users\Ruzna\Desktop\PSC\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+152040776.index
+21341412.index
+247885239.index
+21341412.index
+2136277961.index
+604512023.index
+1214708700.index
+845887165.index
+2595025351.index

@@ -1,0 +1,83 @@
+package com.collectionofficer.psc.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.collectionofficer.psc.bean.CollectPaddy;
+import com.collectionofficer.psc.bean.PaddyPricing;
+
+public class PaddyPricingDao {
+	private String jdbcURL = "jdbc:mysql://localhost:3306/psc_web_app?allowPublicKeyRetrieval=true";
+	private String jdbcUsername = "root";
+	private String jdbcPassword = "Ruzna_421455";
+	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+	
+	private static final String SELECT_ALL_PADDY_PRICING_DETAILS = "select * from tbl_paddy";
+	
+	//generating constructor
+	public PaddyPricingDao() {
+
+	}
+	
+	//writing a method to get the connection of jdbc and inside it loading the driver also,
+	//the method will return the connection
+	// simply said inside this method: 
+	//1. loading the connection 
+	//2. getting the connection 
+	//3. returning connection
+	public Connection getConnection() {
+		Connection connection = null;
+		try {
+			//loading the driver, jdbc driver is a variable assigned above
+			Class.forName(jdbcDriver);
+			//getting the connection using the driver manager class
+			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return connection;
+	}
+	
+	
+	//select all users method
+		//storing all the users in the list and returning that list (Import list) (return type is the list)
+		public List<PaddyPricing> selectAllPaddyPricingDetails() {
+
+			// using try-with-resources to avoid closing resources (boiler plate code)
+			//collected paddies will be stored in the array list
+			List<CollectPaddy> collectPaddyPriceList = new ArrayList<>();
+			// Step 1: Establishing a Connection
+			try (Connection connection = getConnection();
+
+					// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PADDY_PRICING_DETAILS);) {
+				System.out.println(preparedStatement);
+				// Step 3: Execute the query or update query
+				ResultSet rs = preparedStatement.executeQuery();
+
+				// Step 4: Process the ResultSet object.
+				
+
+					int paddy_Id = rs.getInt("paddy_Id");
+					String paddy_Type = rs.getString("paddy_Type");
+					double selling_price_per_Kg = rs.getDouble("selling_price_per_Kg");
+					double buying_price_per_Kg = rs.getDouble("buying_price_per_Kg");
+																					
+					collectPaddyPriceList.add(new PaddyPricing(paddy_Id, paddy_Type, selling_price_per_Kg, buying_price_per_Kg));
+				
+			}
+			
+			//returning the user"s" array list
+			return collectPaddyPriceList;
+		}
+}

@@ -1,0 +1,5 @@
+package next.xadmin.psc.bean;
+
+public class CollectNewPaddyBean {
+
+}
