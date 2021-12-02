@@ -19,4 +19,7 @@
     <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.CollectPaddyDao"/>
     <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.CollectionOfficerProfileDao"/>
     <fullyQualifiedTypeName name="com.collectionofficer.psc.bean.CollectionOfficerProfile"/>
+    <fullyQualifiedTypeName name="com.collectionofficer.psc.bean.RegionalCenter"/>
+    <fullyQualifiedTypeName name="com.collectionofficer.psc.dao.RegionalCenterDao"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

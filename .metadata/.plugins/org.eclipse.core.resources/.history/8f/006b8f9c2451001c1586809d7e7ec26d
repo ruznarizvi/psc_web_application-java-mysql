@@ -1,0 +1,24 @@
+package com.collectionofficer.psc.bean;
+
+public class RegionalCenter {
+	private double current_capacity;
+	
+	
+	public RegionalCenter(double current_capacity) {
+		super();
+		this.current_capacity = current_capacity;
+	}
+	
+	public double getCurrent_capacity() {
+		return current_capacity;
+	}
+	public void setCurrent_capacity(double current_capacity) {
+		this.current_capacity = current_capacity;
+	}
+
+	
+	
+	
+
+
+}

@@ -11,10 +11,26 @@ public class IssuedPayment {
 	private int total_weight;
 	private int total_amount;
 	private Date purchase_date;
+	private int regional_center_Id;
 	
 	
-	public IssuedPayment(String issued_status, int farmer_Id, int paddy_Id,
-			int total_weight, int total_amount, Date purchase_date) {
+	
+//	public IssuedPayment(String issued_status, int farmer_Id, int paddy_Id,
+//			int total_weight, int total_amount, Date purchase_date, int regional_center_Id) {
+//		super();
+//		this.issued_status = issued_status;
+//		this.farmer_Id = farmer_Id;
+//		this.paddy_Id = paddy_Id;
+//		this.total_weight = total_weight;
+//		this.total_amount = total_amount;
+//		this.purchase_date = purchase_date;
+//		this.regional_center_Id = regional_center_Id;
+//	}
+	
+
+	//insert issued payment details
+	public IssuedPayment(String issued_status, int farmer_Id, int paddy_Id, int total_weight,
+			int total_amount, Date purchase_date, int regional_center_Id) {
 		super();
 		this.issued_status = issued_status;
 		this.farmer_Id = farmer_Id;
@@ -22,9 +38,28 @@ public class IssuedPayment {
 		this.total_weight = total_weight;
 		this.total_amount = total_amount;
 		this.purchase_date = purchase_date;
+		this.regional_center_Id = regional_center_Id;
 	}
 	
 	
+
+	public int getRegional_center_Id() {
+		return regional_center_Id;
+	}
+
+
+
+	public void setRegional_center_Id(int regional_center_Id) {
+		this.regional_center_Id = regional_center_Id;
+	}
+
+
+
+	public IssuedPayment(int issued_Id) {
+		super();
+		this.issued_Id = issued_Id;
+	}
+
 	public int getIssued_Id() {
 		return issued_Id;
 	}

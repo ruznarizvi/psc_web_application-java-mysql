@@ -16,8 +16,8 @@ import com.collectionofficer.psc.bean.IssuedPayment;
 
 public class IssuedPaymentDao extends MainDao {	
 	
-	private static final String INSERT_ISSUED_PAYMENT_DETAILS_SQL = "INSERT INTO tbl_issued_payment_details" + "(issued_status, farmer_Id, paddy_Id, total_weight,total_amount, purchase_date) VALUES " + " (?, ?, ?, ?, ?, ?);";
-	
+	private static final String INSERT_ISSUED_PAYMENT_DETAILS_SQL = "INSERT INTO tbl_issued_payment_details" + "(issued_status, farmer_Id, paddy_Id, total_weight,total_amount, purchase_date, regional_center_Id) VALUES " + " (?, ?, ?, ?, ?, ?, ?);";
+//	private static final String DELETE_ISSUED_PADDY_SQL = "delete from tbl_issued_payment_details where issued_Id = ?;";
 	
 	//generating constructor
 	public IssuedPaymentDao() {
@@ -41,7 +41,7 @@ public class IssuedPaymentDao extends MainDao {
 			preparedStatement.setInt(4, issuedPayment.getTotal_weight());
 			preparedStatement.setInt(5, issuedPayment.getTotal_amount());
 			preparedStatement.setDate(6, issuedPayment.getPurchase_date());
-
+			preparedStatement.setInt(7, issuedPayment.getRegional_center_Id());
 			
 			System.out.println(preparedStatement);
 			//finally we are calling the executeupdate method to run the query with the database to insert data
@@ -51,6 +51,9 @@ public class IssuedPaymentDao extends MainDao {
 			printSQLException(e);
 		}
 	}
+	
+
+
 	
 	
 	private void printSQLException(SQLException ex) {
@@ -73,5 +76,6 @@ public class IssuedPaymentDao extends MainDao {
 			}
 		}
 	}
-	
+
+
 }

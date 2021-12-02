@@ -15,7 +15,8 @@ import com.collectionofficer.psc.bean.CollectPaddy;
 //using inheritance to pull database connection from mysql db
 public class CollectPaddyDao extends MainDao{	
 	
-	private static final String INSERT_COLLECTED_PADDY_SQL = "INSERT INTO tbl_collected_paddy_details" + "(farmer_Id, paddy_Id, total_weight,total_amount, purchase_date, collection_officer_Id) VALUES " + " (?, ?, ?, ?, ?, ?);";
+	private static final String INSERT_COLLECTED_PADDY_SQL = "INSERT INTO tbl_collected_paddy_details" + "(farmer_Id, paddy_Id, total_weight,total_amount,"
+			+ " purchase_date, collection_officer_Id, regional_center_Id) VALUES " + " (?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_COLLECTED_PADDY_BY_ID = "select collected_paddy_details_Id, farmer_Id, paddy_Id, total_weight from tbl_collected_paddy_details where collected_paddy_details_Id =?";
 	private static final String SELECT_ALL_COLLECTED_PADDY = "select * from tbl_collected_paddy_details";
 	private static final String DELETE_COLLECTED_PADDY_SQL = "delete from tbl_collected_paddy_details where collected_paddy_details_Id = ?;";
@@ -33,23 +34,23 @@ public class CollectPaddyDao extends MainDao{
 		// try-with-resource statement will auto close the connection.
 		// calling the getconnection method to get the connection of the jdbc and assigning it to the connection object
 		try (Connection connection = getConnection();
-			//with the help of the connection object, we are creating the preparestatement inside that we have passed the insert query
+			//with the help of the connection object, we are creating the prepared statement. Inside that we have passed the insert query
 			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_COLLECTED_PADDY_SQL)) {
 				
-			//after that we are calling the set string method to set the name, email, and country
-//			preparedStatement.setInt(1, collectPaddy.getCollection_officer_Id());
-			preparedStatement.setLong(1, collectPaddy.getFarmer_Id());
+			//after that we are calling the setInt and setDouble java method to set the values
+			preparedStatement.setInt(1, collectPaddy.getFarmer_Id());
 			preparedStatement.setInt(2, collectPaddy.getPaddy_Id());
 			preparedStatement.setDouble(3, collectPaddy.getTotal_weight());
 			preparedStatement.setDouble(4, collectPaddy.getTotal_amount());
 			preparedStatement.setDate(5, collectPaddy.getPurchase_date());
 			preparedStatement.setInt(6, collectPaddy.getCollection_officer_Id());
-			
+			preparedStatement.setInt(7, collectPaddy.getRegional_center_Id());
+	
 			System.out.println(preparedStatement);
-			//finally we are calling the executeupdate method to run the query with the database to insert data
+			//finally we are calling the executeUpdate() method to run the query with the database to insert data
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			//we are calling a print sqlexception method to handle all the exceptions below we are writing the method
+			//we are calling a printSQLException method to handle all the exceptions below we are writing the method
 			printSQLException(e);
 		}
 	}
@@ -261,6 +262,7 @@ public class CollectPaddyDao extends MainDao{
 		return rowDeleted;
 	}
 	
+	
 	private void printSQLException(SQLException ex) {
 		// ex is the object of the sql exception
 		for (Throwable e : ex) {
@@ -280,6 +282,8 @@ public class CollectPaddyDao extends MainDao{
 				}
 			}
 		}
-	}
-	
+	}	
 }
+
+
+

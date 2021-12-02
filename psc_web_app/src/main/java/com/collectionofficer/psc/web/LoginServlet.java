@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("collection_officer_Email", collection_officer_Email);
 			response.sendRedirect("http://localhost:8081/psc_web_app/dashboardlist");
+			System.out.println("Login successful!");
 		}
 		else {
 			out.print("Sorry, username or password error!");

@@ -140,7 +140,6 @@
 				<c:if test="${collectPaddy != null}">
 					<input type="hidden" name="collected_paddy_details_Id" value="<c:out value='${collectPaddy.collected_paddy_details_Id}' />" />
 				</c:if>
-
 				<fieldset class="form-group">
 					<label>Farmer Id</label> <input type="text"
 						value="<c:out value='${collectPaddy.farmer_Id}' />" class="form-control"
@@ -152,7 +151,7 @@
 						value="<c:out value='${collectPaddy.paddy_Id}' />" class="form-control"
 						name="paddy_Id">
 				</fieldset>
-
+				
 				<fieldset class="form-group">
 					<label>Total Weight</label> <input type="text"
 						value="<c:out value='${collectPaddy.total_weight}' />" class="form-control"

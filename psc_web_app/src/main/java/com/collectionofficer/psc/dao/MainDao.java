@@ -10,13 +10,8 @@ public class MainDao {
 	private String jdbcPassword = "Ruzna_421455";
 	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
 	
-	
 	//writing a method to get the connection of jdbc and inside it loading the driver also,
-	//the method will return the connection
-	// simply said inside this method: 
-	//1. loading the connection 
-	//2. getting the connection 
-	//3. returning connection
+	//the following method will return the connection
 	public Connection getConnection() {
 		Connection connection = null;
 		try {

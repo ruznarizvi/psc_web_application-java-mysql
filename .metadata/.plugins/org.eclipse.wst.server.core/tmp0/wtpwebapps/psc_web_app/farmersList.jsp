@@ -127,7 +127,7 @@
 					<div class="table-title">
 						<div class="row">
 							<div class="col-sm-4">
-								<h2>Current Paddy Pricing Details</h2>
+								<h2>Farmer Details</h2>
 							</div>
 
 						</div>

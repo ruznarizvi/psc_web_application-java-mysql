@@ -1,0 +1,64 @@
+package com.collectionofficer.psc.bean;
+
+public class RegionalCenter {
+	private int regional_center_Id;
+	private String regional_center_Name;
+	private String regional_center_Address;
+	private int regional_center_Capacity;
+	private double current_capacity;
+	private int head_office_Id;
+	
+	
+	
+	public RegionalCenter(int regional_center_Id, String regional_center_Name, String regional_center_Address,
+			int regional_center_Capacity, double current_capacity, int head_office_Id) {
+		super();
+		this.regional_center_Id = regional_center_Id;
+		this.regional_center_Name = regional_center_Name;
+		this.regional_center_Address = regional_center_Address;
+		this.regional_center_Capacity = regional_center_Capacity;
+		this.current_capacity = current_capacity;
+		this.head_office_Id = head_office_Id;
+	}
+	
+	public int getRegional_center_Id() {
+		return regional_center_Id;
+	}
+	public void setRegional_center_Id(int regional_center_Id) {
+		this.regional_center_Id = regional_center_Id;
+	}
+	public String getRegional_center_Name() {
+		return regional_center_Name;
+	}
+	public void setRegional_center_Name(String regional_center_Name) {
+		this.regional_center_Name = regional_center_Name;
+	}
+	public String getRegional_center_Address() {
+		return regional_center_Address;
+	}
+	public void setRegional_center_Address(String regional_center_Address) {
+		this.regional_center_Address = regional_center_Address;
+	}
+	public int getRegional_center_Capacity() {
+		return regional_center_Capacity;
+	}
+	public void setRegional_center_Capacity(int regional_center_Capacity) {
+		this.regional_center_Capacity = regional_center_Capacity;
+	}
+	public double getCurrent_capacity() {
+		return current_capacity;
+	}
+	public void setCurrent_capacity(double current_capacity) {
+		this.current_capacity = current_capacity;
+	}
+	public int getHead_office_Id() {
+		return head_office_Id;
+	}
+	public void setHead_office_Id(int head_office_Id) {
+		this.head_office_Id = head_office_Id;
+	}
+	
+		
+	
+
+}

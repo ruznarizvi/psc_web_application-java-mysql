@@ -23,10 +23,12 @@ import com.collectionofficer.psc.bean.CollectPaddy;
 import com.collectionofficer.psc.bean.Farmer;
 import com.collectionofficer.psc.bean.IssuedPayment;
 import com.collectionofficer.psc.bean.PaddyPricing;
+import com.collectionofficer.psc.bean.RegionalCenter;
 import com.collectionofficer.psc.dao.CollectPaddyDao;
 import com.collectionofficer.psc.dao.FarmerDao;
 import com.collectionofficer.psc.dao.IssuedPaymentDao;
 import com.collectionofficer.psc.dao.PaddyPricingDao;
+import com.collectionofficer.psc.dao.RegionalCenterDao;
 
 
 
@@ -41,7 +43,8 @@ public class CollectPaddyServlet extends HttpServlet {
 	private IssuedPaymentDao issuedPaymentDao;
 	private PaddyPricingDao paddyPricingDao;
 	private FarmerDao farmerDao;
-       
+	private RegionalCenterDao regionalCenterDao;
+
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
@@ -50,6 +53,7 @@ public class CollectPaddyServlet extends HttpServlet {
 		  issuedPaymentDao = new IssuedPaymentDao();
 		  paddyPricingDao = new PaddyPricingDao();  
 		  farmerDao = new FarmerDao();
+		  regionalCenterDao = new RegionalCenterDao();
 		
 	}
 	
@@ -71,33 +75,33 @@ public class CollectPaddyServlet extends HttpServlet {
 		{
 		case "/new":
 			//if the action is new, we are going to call the showNewForm method
-			// we are [assing the request and response to the http servlet
+			// we are passing the request and response to the http servlet
 			showNewForm(request, response);
 		break;
 		case "/pricelist":
 			//if the action is new, we are going to call the showNewForm method
-			// we are [assing the request and response to the http servlet
+			// we are passing the request and response to the http servlet
 			listPaddyPricing(request, response);
 		break;
 		case "/farmerslist":
 			//if the action is new, we are going to call the showNewForm method
-			// we are [assing the request and response to the http servlet
+			// we are passing the request and response to the http servlet
 			listFarmers(request, response);
 		break;
 		case "/dashboardlist":
 			//if the action is new, we are going to call the showNewForm method
-			// we are [assing the request and response to the http servlet
+			// we are passing the request and response to the http servlet
 			listDashbaord(request, response);
 		break;
 		case "/insert":
-				insertPaddy(request, response);
+			insertPaddy(request, response);
 				//create another method in here to run both methods simultaneously (CollectionOfficer)
-				insertIssuedPaymentDetails(request, response);
-		
+			insertIssuedPaymentDetails(request, response);	
+			updateCurrentCapacity(request, response);
 			break;
 		
 		case "/delete":
-				deletePaddy(request, response);
+				deletePaddy(request, response);		
 			break;
 			
 		case "/edit":
@@ -107,6 +111,7 @@ public class CollectPaddyServlet extends HttpServlet {
 	
 		case "/update":
 				updatePaddy(request, response);
+//				updateCurrentCapacity(request,response);
 			break;
 	
 			//if there is any other action other than the above then it will go to default
@@ -134,14 +139,14 @@ public class CollectPaddyServlet extends HttpServlet {
 		
 
 		//insert user method
-		private void insertPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-			
-			//by the help of the request object using the get parameter method, we are taking the name, email, country from the jsp page
-			
+		private void insertPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {		
+			//by the help of the request object using the get parameter method, we are taking the farmer_Id, paddy_Id and total_weight from the jsp page		
 			int farmer_Id = Integer.parseInt(request.getParameter("farmer_Id"));	
 			int paddy_Id = Integer.parseInt(request.getParameter("paddy_Id"));
-			int total_weight = Integer.parseInt(request.getParameter("total_weight"));		
+			int total_weight = Integer.parseInt(request.getParameter("total_weight"));	
+	
 			
+			//using session to get current user
 			String session = (String) request.getSession(false).getAttribute("collection_officer_Email");
 			
 			CollectPaddyDao obJDBConnection = new CollectPaddyDao();
@@ -150,7 +155,7 @@ public class CollectPaddyServlet extends HttpServlet {
 			PreparedStatement ps=null;
 			ResultSet rq=null;				
 			
-			//String query = "select * from users";
+			//selecting all paddy related details from tbl_paddy
 			String query = "select paddy_Id,paddy_Type,selling_price_per_Kg,buying_price_per_Kg,head_office_Id from tbl_paddy where paddy_Id ='"+paddy_Id+"'";
 			ps = connection.prepareStatement (query);
 			rq = ps.executeQuery();
@@ -159,39 +164,40 @@ public class CollectPaddyServlet extends HttpServlet {
 				
 			double buying_price_per_Kg = rq.getDouble("buying_price_per_Kg");	
 			int buying_price_per_Kg_int = rq.getInt("buying_price_per_Kg");
+			//getting total amount by multiplying buying_price_per_Kg*total_weight
 			int total_amount = buying_price_per_Kg_int*total_weight;
 
+			//getting current date and assigning it to purchase_date variable
 		    long millis=System.currentTimeMillis();  
 		    java.sql.Date date=new java.sql.Date(millis);
 			Date purchase_date;			
 			purchase_date = date;
-			
-//			HttpSession session = request.getSession();
-		
+
 			PreparedStatement pc=null;
 			ResultSet rc=null;				
 			
-			
-			//String query = "select * from users";
-			String queryc = "select collection_officer_Id,collection_officer_Name,collection_officer_Username,collection_officer_Email,collection_officer_Address,collection_officer_Contact,collection_officer_Password,regional_center_Id from tbl_collection_officer where collection_officer_Email ='"+session+"'";
+			//getting collection officer details using session via collection_officer_Email 
+			String queryc = "select collection_officer_Id,collection_officer_Name,collection_officer_Username,collection_officer_Email,"
+					+ "collection_officer_Address,collection_officer_Contact,collection_officer_Password,regional_center_Id"
+					+ " from tbl_collection_officer where collection_officer_Email ='"+session+"'";
 			pc = connection.prepareStatement (queryc);
 			rc = pc.executeQuery();
 			
-			while(rc.next()) {
-				
+			while(rc.next()) {			
 			int collection_officer_Id = rc.getInt("collection_officer_Id");
-			//after that we are storing it in the userBean class
-			//the newUser variable contains the data
-			CollectPaddy newPaddy = new CollectPaddy (farmer_Id, paddy_Id, total_weight, total_amount, purchase_date, collection_officer_Id);
+			int regional_center_Id = rc.getInt("regional_center_Id");
+		
+			//after that we are storing it in the CollectPaddy bean class
+			//the newPaddy variable contains the data
+			CollectPaddy newPaddy = new CollectPaddy (farmer_Id, paddy_Id, total_weight, total_amount, purchase_date, collection_officer_Id, regional_center_Id);
 			
 			collectPaddyDao.insertPaddy(newPaddy);
 			//sending a response to the sendRedirect list taking the action as a list
 			//the list action will be handled by the default in the switch statement since its different
-			response.sendRedirect("list");
-			
+			System.out.println("Paddy collection inserted successfully!");
+			response.sendRedirect("list");		
     	}			
-	  }
-			
+	  }			
 	}
 		
 		
@@ -200,11 +206,12 @@ public class CollectPaddyServlet extends HttpServlet {
 		private void insertIssuedPaymentDetails(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 			
 			//by the help of the request object using the get parameter method, we are taking the name, email, country from the jsp page
+			String session = (String) request.getSession(false).getAttribute("collection_officer_Email");
 			
 			int farmer_Id = Integer.parseInt(request.getParameter("farmer_Id"));	
 			int paddy_Id = Integer.parseInt(request.getParameter("paddy_Id"));
 			int total_weight = Integer.parseInt(request.getParameter("total_weight"));
-			
+		
 			IssuedPaymentDao obJDBConnection = new IssuedPaymentDao();
 			Connection connection = obJDBConnection.getConnection();
 					
@@ -228,21 +235,36 @@ public class CollectPaddyServlet extends HttpServlet {
 			purchase_date = date;
 			
 			String issued_status = "Not Issued";
+			
+			PreparedStatement pc=null;
+			ResultSet rc=null;				
+			
+			//getting collection officer details using session via collection_officer_Email 
+			String queryc = "select collection_officer_Id,collection_officer_Name,collection_officer_Username,collection_officer_Email,"
+					+ "collection_officer_Address,collection_officer_Contact,collection_officer_Password,regional_center_Id"
+					+ " from tbl_collection_officer where collection_officer_Email ='"+session+"'";
+			pc = connection.prepareStatement (queryc);
+			rc = pc.executeQuery();
+			
+			while(rc.next()) {
+				//after that we are storing it in the userBean class
+				//the newUser variable contains the data
+				int regional_center_Id = rc.getInt("regional_center_Id");
+				IssuedPayment newIssuedPayment = new IssuedPayment (issued_status,farmer_Id, paddy_Id, total_weight, total_amount, purchase_date, regional_center_Id);
+				
+				issuedPaymentDao.insertIssuedPaymentDetails(newIssuedPayment);
+				//sending a response to the sendRedirect list taking the action as a list
+				//the list action will be handled by the default in the switch statement since its different
+			}
 
 		
-			//after that we are storing it in the userBean class
-			//the newUser variable contains the data
-			IssuedPayment newIssuedPayment = new IssuedPayment (issued_status,farmer_Id, paddy_Id, total_weight, total_amount, purchase_date);
 			
-			issuedPaymentDao.insertIssuedPaymentDetails(newIssuedPayment);
-			//sending a response to the sendRedirect list taking the action as a list
-			//the list action will be handled by the default in the switch statement since its different
   				
 	  }
 			
 	}
-		
-		
+				
+
 		//delete user method
 		private void deletePaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 			//getting the id from the request object using the getParamter method and transfering into integer type and passing into the id variable
@@ -254,10 +276,11 @@ public class CollectPaddyServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			//after that returning the response to the list, it will handle in the swicth case of the default section
+			System.out.println("Paddy collection deleted successfully!");
 			response.sendRedirect("list");
-
 		}
-
+		
+		
 		
 		//showedit form method
 		private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -311,11 +334,70 @@ public class CollectPaddyServlet extends HttpServlet {
 					//the newUser variable contains the data
 			CollectPaddy collectPaddy = new CollectPaddy(collected_paddy_details_Id, farmer_Id, paddy_Id, total_weight, total_amount);
 			//calling user update method using the userdao object
-			collectPaddyDao.updatePaddy(collectPaddy); 
+			collectPaddyDao.updatePaddy(collectPaddy);
+			System.out.println("Paddy collection updated successfully!");
 			response.sendRedirect("list");
 		}
 		
 		}
+		
+		private void updateCurrentCapacity(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+			
+			
+			CollectPaddyDao obJDBConnection = new CollectPaddyDao();
+			Connection connection = obJDBConnection.getConnection();
+			
+			String session = (String) request.getSession(false).getAttribute("collection_officer_Email");
+				
+			PreparedStatement pc=null;
+			ResultSet rc=null;				
+			
+			//getting collection officer details using session via collection_officer_Email 
+			String queryc = "select collection_officer_Id,collection_officer_Name,collection_officer_Username,collection_officer_Email,"
+					+ "collection_officer_Address,collection_officer_Contact,collection_officer_Password,regional_center_Id"
+					+ " from tbl_collection_officer where collection_officer_Email ='"+session+"'";
+			pc = connection.prepareStatement (queryc);
+			rc = pc.executeQuery();	
+
+			while(rc.next()) {
+		
+				
+				int regional_center_Id = rc.getInt("regional_center_Id");
+				
+				PreparedStatement ps=null;
+				ResultSet rq=null;	
+				
+				String query = "select regional_center_Name, regional_center_Address, regional_center_Capacity, head_office_Id, current_capacity from tbl_regional_center where regional_center_Id ='"+regional_center_Id+"'";
+				
+				//String query = "select * from users";
+//				String query = "select total_weight from tbl_collected_paddy_details where regional_center_Id ='"+regional_center_Id+"'";
+				ps = connection.prepareStatement (query);
+				rq = ps.executeQuery(); 
+			
+			while(rq.next()) {
+
+//				int total_weight = Integer.parseInt(request.getParameter("total_weight"));
+				int capacity = rq.getInt("current_capacity");	
+				int total_weight = Integer.parseInt(request.getParameter("total_weight"));
+		
+					//after that we are storing it in the userBean class
+				    //the newUser variable contains the data
+				
+			    int current_capacity = capacity + total_weight;
+					
+					RegionalCenter regionalCenter = new RegionalCenter(regional_center_Id, current_capacity);
+					//calling user update method using the userdao object
+					regionalCenterDao.updateCurrentCapacity(regionalCenter); 
+				
+
+			
+			}	
+				
+			}
+
+			
+	
+	}
 		
 		//default method
 			private void listPaddy(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
